@@ -9,6 +9,6 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="첫번째"
+        android:text="첫번째페이지 입니다. 옆으로 넘겨보세요!"
         android:textSize="40dp" />
 </LinearLayout>
