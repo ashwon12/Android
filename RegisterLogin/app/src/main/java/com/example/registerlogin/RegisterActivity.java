@@ -40,8 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // 현재 입력되어 있는 값들 가져오기
                 String userID = et_id.getText().toString();
-                String userPass = et_id.getText().toString();
-                String userName = et_id.getText().toString();
+                String userPass = et_pass.getText().toString();
+                String userName = et_name.getText().toString();
                 int userAge = Integer.parseInt(et_age.getText().toString());
 
                 Response.Listener<String> reponseListner = new Response.Listener<String>() {
@@ -51,11 +51,11 @@ public class RegisterActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success =jsonObject.getBoolean("success"); //회원등록에 성공했는지 물어봄
                             if(success){ //회원등록에 성공한 경우
-                                Toast.makeText(getApplicationContext(),"회원가입에 성공하였습니다.",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"회원가입에 성공하였습니다.",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                                 startActivity(intent);
                             }else { //회원 등록에 실패한 경우
-                                Toast.makeText(getApplicationContext(), "회원가입에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         } catch (JSONException e) {
@@ -65,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
 
+                //서버로 volley를 이용해서 넘겨준다.
                 RegisterRequest registerRequest = new RegisterRequest(userID,userPass,userName,userAge, reponseListner);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
