@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -26,6 +27,14 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
+    //이메일 로그인에 필요한 변수들
+    private Button btn_login;
+    private Button btn_signup;
+    private EditText email_login;
+    private EditText pass_login;
+
+
+    //구글 로그인에 필요한 변수들
     private SignInButton btn_google; //구글 로그인 버튼
     private FirebaseAuth auth; //파이어베이즈 인증 객체
     private GoogleApiClient googleApiClient; //구글API클라이언트
@@ -36,6 +45,47 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        auth = FirebaseAuth.getInstance(); //파이어베이스 인증 객체 초기화
+        email_login =(EditText) findViewById(R.id.email_login);
+        pass_login =(EditText) findViewById(R.id.pass_login);
+        btn_login =(Button) findViewById(R.id.btn_login);
+        btn_signup =(Button)findViewById(R.id.btn_signup);
+
+        //회원가입 버튼을 눌렀을 때
+        btn_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Signup.class);
+                startActivity(intent);
+            }
+        });
+
+
+        //로그인 버튼을 눌렀을 때
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = email_login.getText().toString();
+                String pwd = pass_login.getText().toString().trim();
+
+                auth.signInWithEmailAndPassword(email, pwd)
+                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(MainActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(MainActivity.this, "로그인 오류", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+            }
+        });
+
+        //구글 로그인 설정
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -47,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             .build();
 
 
-        auth = FirebaseAuth.getInstance(); //파이어베이스 인증 객체 초기화
+        //구글 로그인 버튼을 눌렀을 때
         btn_google = findViewById(R.id.btn_google);
         btn_google.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -97,4 +148,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
     }
+
+
 }

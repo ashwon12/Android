@@ -19,11 +19,33 @@
 
     <ImageView
         android:id="@+id/iv_profile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="200dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Logout"
+        app:layout_constraintEnd_toEndOf="@+id/btn_community"
+        app:layout_constraintStart_toStartOf="@+id/btn_community"
+        app:layout_constraintTop_toBottomOf="@+id/btn_community" />
+
+    <Button
+        android:id="@+id/btn_community"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Community"
+        app:layout_constraintEnd_toEndOf="@+id/tv_result"
+        app:layout_constraintStart_toStartOf="@+id/tv_result"
+        app:layout_constraintTop_toBottomOf="@+id/tv_result" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
