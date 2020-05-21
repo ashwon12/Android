@@ -53,6 +53,9 @@ public class Signup extends AppCompatActivity {
         img_check =(ImageView) findViewById(R.id.img_check);
         btn_sign =(Button) findViewById(R.id.btn_sign);
 
+
+        //TODO 비밀번호 중복검사 부분 완성이 안되어서 완성해야함......
+
         pwd_check.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
