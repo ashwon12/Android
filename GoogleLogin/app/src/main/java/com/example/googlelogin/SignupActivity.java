@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
 
-public class Signup extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
 
     // 비밀번호 정규식
     private static final Pattern PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{4,16}$");
@@ -54,7 +53,8 @@ public class Signup extends AppCompatActivity {
         btn_sign =(Button) findViewById(R.id.btn_sign);
 
 
-        //TODO 비밀번호 중복검사 부분 완성이 안되어서 완성해야함......
+        //TODO 비밀번호 중복검사 부분 완성이 안되어서 완성하기...(～￣▽￣)～
+        //TODO 로그인인증 등 회원가입 부분 완성도를 더 올리기
 
         pwd_check.addTextChangedListener(new TextWatcher() {
             @Override
@@ -122,12 +122,12 @@ public class Signup extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // 회원가입 성공
-                            Toast.makeText(Signup.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Signup.this, MainActivity.class);
+                            Toast.makeText(SignupActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                             startActivity(intent);
                         } else {
                             // 회원가입 실패
-                            Toast.makeText(Signup.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
