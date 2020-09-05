@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "913593303197",
+    "firebase_url": "https://malive-cae70.firebaseio.com",
+    "project_id": "malive-cae70",
+    "storage_bucket": "malive-cae70.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913593303197:android:99d48ad2b76d97bde05474",
+        "android_client_info": {
+          "package_name": "com.example.firestorage_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913593303197-7rpsdpk6croh2hvjli2634a7l15frrc0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdvrGGf6-bwBZrw9mqM9SnPT5qlswCui4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "913593303197-7rpsdpk6croh2hvjli2634a7l15frrc0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
