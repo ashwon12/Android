@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -28,6 +30,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,38 +77,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     private String getFileExtensions(Uri uri){
-        ContentResolver contentResolver =getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
     private void uploadFile() {
         if(image_uri != null){
-            StorageReference fileReference = storageReference.child(System.currentTimeMillis()
+            final StorageReference fileReference = storageReference.child("uploads/"+ System.currentTimeMillis()
                     +"."+getFileExtensions(image_uri));
 
             fileReference.putFile(image_uri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
+
+                            fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
-                                public void run() {
-                                    progressBar.setProgress(0);
+                                public void onSuccess(Uri uri) {
+                                    //creating the upload object to store uploaded image details
+                                    Upload upload = new Upload(file_name.getText().toString().trim(), uri.toString());
+
+                                    //adding an upload to firebase database
+                                    String uploadId = databaseReference.push().getKey();
+                                   databaseReference.child(uploadId).setValue(upload);
                                 }
-                            },5000);
-
-                            Upload upload = new Upload(file_name.getText().toString().trim()
-                                    ,taskSnapshot.getUploadSessionUri().toString());
-                            String uploadId = databaseReference.push().getKey();
-                            databaseReference.child(uploadId).setValue(upload);
-
+                            });
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -134,13 +135,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if(requestCode == PICK_IMAGE_REQUEST_CODE
             ){
             image_uri = data.getData();
-            Log.d("CommunityFragment", "img_uri = "+image_uri);
-
-            Picasso.get().load(image_uri).into(get_image);
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),image_uri);
+                get_image.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
