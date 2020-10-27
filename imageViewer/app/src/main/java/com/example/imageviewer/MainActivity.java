@@ -88,10 +88,11 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }
                 else{
-                    Toast.makeText(MainActivity.this, "permission을 허용해주세요", Toast.LENGTH_SHORT).show();
-                    ActivityCompat.requestPermissions(this,new String[]
-                            {Manifest.permission.WRITE_EXTERNAL_STORAGE},1000);
-                }
+                Toast.makeText(MainActivity.this, "permission을 허용해주세요", Toast.LENGTH_SHORT).show();
+                ActivityCompat.requestPermissions(this,new String[]
+                        {Manifest.permission.WRITE_EXTERNAL_STORAGE},1000);
+                break;
+            }
         }
     }
 
