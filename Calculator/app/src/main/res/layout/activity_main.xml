@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="숫자를 입력하세요"
-        android:inputType="textPersonName"
-        tools:layout_marginTop="40dp"/>
+        android:inputType="number"
+        tools:layout_marginTop="40dp" />
 
     <EditText
         android:id="@+id/et2"
@@ -21,51 +21,56 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="숫자를 입력하세요"
-        android:inputType="textPersonName"
-        tools:layout_marginTop="40dp"/>
-
-    <Button
-        android:id="@+id/btn1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="더하기"
-        tools:layout_marginTop="40dp" />
-
-    <Button
-        android:id="@+id/btn2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="빼기"
-        tools:layout_marginTop="20dp"/>
-
-    <Button
-        android:id="@+id/btn3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="곱하기"
-        tools:layout_marginTop="20dp"/>
-
-    <Button
-        android:id="@+id/btn4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="나누기"
-        tools:layout_marginTop="20dp"/>
-
-    <Button
-        android:id="@+id/btn5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="나머지 값"
+        android:inputType="number"
         tools:layout_marginTop="20dp" />
 
-    <TextView
-        android:id="@+id/result"
+    <RadioGroup
+        android:id="@+id/rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="계산결과"
-        android:textColor="#FF0000"
-        android:textSize="36sp"
-        tools:layout_marginTop="40dp"/>
+        android:layout_margin="10dp">
+
+        <RadioButton
+            android:id="@+id/rb1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="더하기" />
+
+        <RadioButton
+            android:id="@+id/rb2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="빼기" />
+
+        <RadioButton
+            android:id="@+id/rb3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="곱하기" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="계산하기" />
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="계산결과"
+            android:textColor="#FF0000"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

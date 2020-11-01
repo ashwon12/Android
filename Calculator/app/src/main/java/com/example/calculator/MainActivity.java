@@ -1,22 +1,26 @@
 package com.example.calculator;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btn1,btn2,btn3,btn4,btn5;
+    private Button btn;
     private EditText et1,et2;
     private TextView result;
+    private RadioGroup rg;
 
-    double num1,num2,cal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,62 +28,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         //아이디 값 찾아주기
-        btn1=(Button)findViewById(R.id.btn1);
-        btn2=(Button)findViewById(R.id.btn2);
-        btn3=(Button)findViewById(R.id.btn3);
-        btn4=(Button)findViewById(R.id.btn4);
-        btn5=(Button)findViewById(R.id.btn5);
+        btn=(Button)findViewById(R.id.btn);
         et1=(EditText)findViewById(R.id.et1);
         et2=(EditText)findViewById(R.id.et2);
+        rg=(RadioGroup)findViewById(R.id.rg);
         result=(TextView)findViewById(R.id.result);
 
         //버튼 리스너
-        btn1.setOnClickListener(this);
-        btn2.setOnClickListener(this);
-        btn3.setOnClickListener(this);
-        btn4.setOnClickListener(this);
-        btn5.setOnClickListener(this);
-
+        btn.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View view) {
-        if (et1.getText().toString().equals("") && et2.getText().toString().equals("")) {
+
+
+        if (et1.getText().toString().equals("") || et2.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "숫자를 입력해주세요", Toast.LENGTH_SHORT).show();
-        } else {
-            num1 = Double.parseDouble(et1.getText().toString());
-            num2 = Double.parseDouble(et2.getText().toString());
-            switch (view.getId()) {
-                case R.id.btn1:
-                    cal = num1 + num2;
-                    break;
-                case R.id.btn2:
-                    cal = num1 - num2;
-                    break;
-                case R.id.btn3:
-                    cal = num1 * num2;
-                    break;
-                case R.id.btn4:
-                    if (num2 == 0) {
-                        Toast.makeText(getApplicationContext(), "0으로는 나눌 수 없습니다.", Toast.LENGTH_SHORT).show();
-                        result.setText("");
-                        return;
-                    } else {
-                        cal = num1 / num2;
-                        break;
-                    }
-                case R.id.btn5:
-                    if (num2 == 0) {
-                        Toast.makeText(getApplicationContext(), "0으로는 나눌 수 없습니다.", Toast.LENGTH_SHORT).show();
-                        result.setText("");
-                        return;
-                    } else {
-                        cal = num1 % num2;
-                        break;
-                    }
+        }else {
+            int num1=Integer.parseInt(et1.getText().toString());
+            int num2=Integer.parseInt(et2.getText().toString());
+
+            int id = rg.getCheckedRadioButtonId();
+            if(id == R.id.rb1) {
+                Intent intent = new Intent(MainActivity.this,AddActivity.class);
+                intent.putExtra("num1",num1);
+                intent.putExtra("num2",num2);
+                startActivityForResult(intent,0);
+            }else if(id == R.id.rb2) {
+                Intent intent = new Intent(MainActivity.this,SubActivity.class);
+                intent.putExtra("num1",num1);
+                intent.putExtra("num2",num2);
+                startActivityForResult(intent,0);
+            }else if(id == R.id.rb3) {
+                Intent intent= new Intent(MainActivity.this,MulActivity.class);
+                intent.putExtra("num1",num1);
+                intent.putExtra("num2",num2);
+                startActivityForResult(intent,0);
+            }else{
+                Toast.makeText(MainActivity.this,"버튼을 선택해주세요",Toast.LENGTH_SHORT).show();
             }
-            result.setText("계산결과 : " + String.format("%.2f", cal));
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            int resultValue = data.getIntExtra("resultVal", 0);
+            result.setText(String.valueOf(resultValue));
         }
     }
 }
