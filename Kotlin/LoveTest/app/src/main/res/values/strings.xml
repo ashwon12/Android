@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">LoveTest</string>
     <string name="main_text"> Let\'s find out \nyour love type!</string>
-    <string name="question">There were favorite flowers\nin the flower base.\nAs time goes, the flowers\nhave all withered.\nWhat are you going to do with that?</string>
+    <string name="question">꽃병에 맘에드는 꽃이 담겨져 있었습니다. \n 하지만 꽃이 다 시들어버렸어요 \n 이 때 당신은 어떻게 할 것인가요?</string>
 </resources>
