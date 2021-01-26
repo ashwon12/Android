@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface IRetrofit {
 
     @GET(API.SEARCH_PHOTO)
-    fun searchPhoto(@Query("query") keyword: String) : Call<JsonElement>
+    fun searchPhoto(@Query("query") keyword: String): Call<JsonElement>
 
     @GET(API.SEARCH_USER)
     fun searchUsers(@Query("query") keyword: String): Call<JsonElement>

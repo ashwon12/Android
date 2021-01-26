@@ -8,6 +8,11 @@ import com.google.gson.JsonElement
 import retrofit2.Call
 import retrofit2.Response
 
+
+/**
+ * 매니저를 통해서 레트로핏을 호출
+ */
+
 class RetrofitManager{
 
     companion object {
@@ -18,7 +23,7 @@ class RetrofitManager{
     private val iRetrofit : IRetrofit? = RetrofitClient.getClient(API.BASE_URL)?.create(IRetrofit::class.java)
 
     //사진 검색 api 호출
-    fun searchPhoto(keyword: String?,completion: (RESPONSE_STATE,String)-> Unit ) {
+    fun searchPhoto(keyword: String?, completion: (RESPONSE_STATE,String)-> Unit ) {
         
         val term = keyword.let {
             it
@@ -40,7 +45,6 @@ class RetrofitManager{
 
                 completion(RESPONSE_STATE.OK,response.raw().toString())
             }
-
         })
 
     }
