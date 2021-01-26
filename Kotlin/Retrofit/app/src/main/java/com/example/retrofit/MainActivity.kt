@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.retrofit.retrofit.RetrofitManager
 import com.example.retrofit.utils.Constans.TAG
+import com.example.retrofit.utils.RESPONSE_STATE
 import com.example.retrofit.utils.SEARCH_TYPE
 import com.example.retrofit.utils.onMyTextChanged
 import kotlinx.android.synthetic.main.activity_main.*
@@ -66,8 +68,24 @@ class MainActivity : AppCompatActivity() {
         //버튼 클릭시
         btn_search.setOnClickListener {
             Log.d(TAG, "검색 버튼 클릭됐음")
+
+            //검색 api 호출
+            RetrofitManager.instance.searchPhoto(keyword = search_term_edit_text.toString(), completion = {
+                responseStatus,reponseBody ->
+
+                when(responseStatus){
+                    RESPONSE_STATE.OK -> {
+                        Log.d(TAG, "API 호출 성공 : ${reponseBody}")
+                    }
+
+                    RESPONSE_STATE.FAIL -> {
+                        Toast.makeText(this,"API called Error", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
         }
     } //onCreate
+
 
     private fun handlesSearchButtonUI() {
         btn_progress.visibility = View.VISIBLE
