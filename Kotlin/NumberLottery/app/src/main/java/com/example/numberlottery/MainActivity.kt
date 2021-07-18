@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
@@ -71,7 +72,19 @@ class MainActivity : AppCompatActivity() {
             textView.isVisible = true
             textView.text = numPick.value.toString()
 
+            setNumBack(numPick.value,textView)
+
             pickNumSet.add(numPick.value)
+        }
+    }
+
+    private fun setNumBack(number : Int, textView: TextView){
+        when(number){
+            in 1..10 -> textView.background = ContextCompat.getDrawable(this, R.drawable.circle_blue)
+            in 11..20 ->textView.background = ContextCompat.getDrawable(this, R.drawable.circle_yellow)
+            in 21..30 ->textView.background = ContextCompat.getDrawable(this, R.drawable.circle_red)
+            in 31..40 ->textView.background = ContextCompat.getDrawable(this, R.drawable.circle_gray)
+            else ->textView.background = ContextCompat.getDrawable(this, R.drawable.circle_green)
         }
     }
 
@@ -96,6 +109,8 @@ class MainActivity : AppCompatActivity() {
 
                 textView.text = number.toString()
                 textView.isVisible = true
+
+                setNumBack(number,textView)
             }
         }
     }

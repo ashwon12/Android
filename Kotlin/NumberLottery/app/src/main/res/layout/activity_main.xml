@@ -47,6 +47,8 @@
 
 
         <TextView
+            android:gravity="center"
+            android:textColor="@color/white"
             android:id="@+id/tv_num1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,6 +60,8 @@
             android:text="1"/>
 
         <TextView
+            android:gravity="center"
+            android:textColor="@color/white"
             android:id="@+id/tv_num2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,6 +73,8 @@
             android:text="1"/>
 
         <TextView
+            android:gravity="center"
+            android:textColor="@color/white"
             android:id="@+id/tv_num3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,6 +86,8 @@
             android:text="1"/>
 
         <TextView
+            android:gravity="center"
+            android:textColor="@color/white"
             android:id="@+id/tv_num4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,6 +99,8 @@
             android:text="1"/>
 
         <TextView
+            android:gravity="center"
+            android:textColor="@color/white"
             android:id="@+id/tv_num5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,6 +112,8 @@
             android:text="1"/>
 
         <TextView
+            android:gravity="center"
+            android:textColor="@color/white"
             android:id="@+id/tv_num6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
