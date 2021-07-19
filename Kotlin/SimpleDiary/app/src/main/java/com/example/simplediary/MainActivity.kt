@@ -1,6 +1,7 @@
 package com.example.simplediary
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -63,9 +64,7 @@ class MainActivity : AppCompatActivity() {
             val passwordPreFerences = getSharedPreferences("password", Context.MODE_PRIVATE)
             val userPassWord = "${numPicker1.value}${numPicker2.value}${numPicker3.value}" // 사용자가 입력한 비밀번호
             if(passwordPreFerences.getString("password", "000").equals(userPassWord)){
-                // 초기값은 000으로 비밀번호 설정
-
-                //votmdnjem tj
+                startActivity(Intent(this, DiaryActivity::class.java))
             }else{
                 showErrorDialog()
             }
@@ -75,8 +74,6 @@ class MainActivity : AppCompatActivity() {
             val passwordPreFerences = getSharedPreferences("password", Context.MODE_PRIVATE)
             val userPassWord = "${numPicker1.value}${numPicker2.value}${numPicker3.value}" // 사용자가 입력한 비밀번호
             if(chagePasswordMode){
-
-
                 passwordPreFerences.edit(true){
                     putString("password", userPassWord)
                 }
