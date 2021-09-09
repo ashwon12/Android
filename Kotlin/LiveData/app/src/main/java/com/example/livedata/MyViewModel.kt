@@ -14,6 +14,7 @@ class MyViewModel : ViewModel() {
     //mutableLiveData - 수정가능, 내부에서 사용
     //LiveDate - 수정불가능, 읽기전용 외부에서 사용
 
+    //1. LiveData 인스턴스 생성
     private val _currentValue = MutableLiveData<Int>()
     val currentValue : LiveData<Int>
         get() = _currentValue
