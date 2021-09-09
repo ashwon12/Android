@@ -7,7 +7,7 @@
 - [BMI계산기](Kotlin/CaculatorBMI/)
 - [JSON 데이터 받아오기](Kotlin/getJSON/)
 - [Retrofit 라이브러리](Kotlin/Retrofit/)
-- [LiveData 사용한 간단한 계산기](/Kotlin/LiveData/)- 21.09.09
+- [LiveData 사용한 간단한 계산기](/Kotlin/LiveData/)
   
 
 <br>
