@@ -31,7 +31,19 @@ class MainActivity : AppCompatActivity() , View.OnClickListener {
             tvNumber.text = it.toString()
         })
 
-       
+        btnPlus.setOnClickListener(this)
+        btnMinus.setOnClickListener(this)
     }
 
+    override fun onClick(v: View?) {
+        val userInput = etInput.text.toString().toInt()
+
+        when(v){
+            //LiveData 관찰
+            btnPlus ->
+                myViewModel.updateValue(ActionType.PLUS, userInput)
+            btnMinus ->
+                myViewModel.updateValue(ActionType.MINUS, userInput)
+        }
+    }
 }
